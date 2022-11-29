@@ -1,13 +1,42 @@
 import tkinter as tk
+import tkinter.messagebox as messagebox
 
 
 class LoginScreen(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
-        super().__init__(self, parent, *args, **kwargs)
-
+        super().__init__(parent, *args, **kwargs)
         self.parent = parent
+
+        self.user_name = tk.StringVar(self)
         self.password = tk.StringVar(self)
-        self.login_entry_label = tk.Label(self, text="Username")
-        self.login_entry_label.pack()
-        self.login = tk.Entry(self, textvariable=self.password)
-        self.login.pack()
+
+        self.login_form_container = tk.Frame(self)
+
+        self.user_name_label = tk.Label(
+            self.login_form_container, text="Username")
+        self.user_name_entry = tk.Entry(
+            self.login_form_container, textvariable=self.user_name)
+
+        self.password_label = tk.Label(
+            self.login_form_container, text="Password")
+        self.password_entry = tk.Entry(
+            self.login_form_container, textvariable=self.password, show="•")
+
+        self.login_button = tk.Button(
+            self.login_form_container, text="Login", command=self.login_handler)
+
+        self.user_name_label.pack()
+        self.user_name_entry.pack()
+        self.password_label.pack()
+        self.password_entry.pack()
+        self.login_button.pack()
+
+        self.login_form_container.place(relx=0.5, rely=0.5, anchor="c")
+
+    def login_handler(self):
+        username = self.user_name.get()
+        password = self.password.get()
+        if username == "" or password == "":
+            messagebox.showerror(message="Username and password is required")
+            return
+        self.parent.login(username, password)
