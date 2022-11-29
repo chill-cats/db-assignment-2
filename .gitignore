@@ -1,0 +1,5 @@
+# Python cache directory
+__pycache__
+
+# Virtual envs directory, list your virtual envs directory in here
+db-gui
