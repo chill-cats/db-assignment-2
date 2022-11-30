@@ -40,3 +40,6 @@ class LoginScreen(tk.Frame):
             messagebox.showerror(message="Username and password is required")
             return
         self.parent.login(username, password)
+
+    def before_switch_handler(self):
+        pass

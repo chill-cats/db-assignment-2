@@ -23,3 +23,6 @@ class MenuScreen(tk.Frame):
 
     def insert_room_type_handler(self):
         self.parent.switch_to("InsertRoomType")
+
+    def before_switch_handler(self):
+        pass

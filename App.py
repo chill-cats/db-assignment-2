@@ -38,19 +38,23 @@ class App(tk.Tk):
         self.switch_to("LoginScreen")
 
     def switch_to(self, screen: str):
+        screen_to_switch_to: tk.Frame
         match screen:
             case "MenuScreen":
-                self.sub_screens[0].tkraise()
+                screen_to_switch_to = self.sub_screens[0]
             case "LoginScreen":
-                self.sub_screens[1].tkraise()
+                screen_to_switch_to = self.sub_screens[1]
             case "ShowCustomerScreen":
-                self.sub_screens[2].show_customer_table()
-                self.sub_screens[2].tkraise()
+                screen_to_switch_to = self.sub_screens[2]
             case "InsertRoomType":
-                self.sub_screens[3].tkraise()
+                screen_to_switch_to = self.sub_screens[3]
             case _:
                 raise ValueError(
                     f"screen must be one of \"MenuScreen\", \"LoginScreen\" or \"ShowCustomerScreen\", recived {screen}")
+
+        screen_to_switch_to.before_switch_handler()
+
+        screen_to_switch_to.tkraise()
 
     def login(self, username: str, password: str):
         print(f"Connecting with {username}, {password}")

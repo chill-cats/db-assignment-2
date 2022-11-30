@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import sql_command as sql
 
+
 class InsertRoomType(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
@@ -28,4 +29,7 @@ class InsertRoomType(tk.Frame):
         self.parent.switch_to("MenuScreen")
 
     def show_customer_table(self):
+        pass
+
+    def before_switch_handler(self):
         pass
