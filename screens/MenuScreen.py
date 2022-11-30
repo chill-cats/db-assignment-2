@@ -12,7 +12,14 @@ class MenuScreen(tk.Frame):
         self.show_customer_button = tk.Button(
             self.menu_form_container, text="Show customer", command=self.show_customer_handler)
 
+        self.insert_room_type_button = tk.Button(
+            self.menu_form_container, text="Insert room type", command=self.insert_room_type_handler)
+
         self.show_customer_button.grid(column=0, row=0)
+        self.insert_room_type_button.grid(column=1, row=0)
 
     def show_customer_handler(self):
         self.parent.switch_to("ShowCustomerScreen")
+
+    def insert_room_type_handler(self):
+        self.parent.switch_to("InsertRoomType")
