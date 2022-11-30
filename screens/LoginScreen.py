@@ -25,11 +25,11 @@ class LoginScreen(tk.Frame):
         self.login_button = tk.Button(
             self.login_form_container, text="Login", command=self.login_handler)
 
-        self.user_name_label.pack()
-        self.user_name_entry.pack()
-        self.password_label.pack()
-        self.password_entry.pack()
-        self.login_button.pack()
+        self.user_name_label.grid(column=0, row=0, padx=(20, 20))
+        self.user_name_entry.grid(column=1, row=0, pady=(20, 10))
+        self.password_label.grid(column=0, row=1, padx=(20, 20))
+        self.password_entry.grid(column=1, row=1, pady=(10, 0))
+        self.login_button.grid(column=1, row=2, pady=(20, 20))
 
         self.login_form_container.place(relx=0.5, rely=0.5, anchor="c")
 
