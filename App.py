@@ -26,8 +26,9 @@ class App(tk.Tk):
 
         # Window creation
         self.title("Hotel Management")
-        self.geometry('800x600')
-        #self.resizable(0, 0)
+        self.geometry('1200x800')
+        self.resizable(0, 0)
+        # self.state('zoomed')
 
         self.pg_connection: Optional[pg.Connection] = None
         self.sub_screens = [MenuScreen(self), LoginScreen(
