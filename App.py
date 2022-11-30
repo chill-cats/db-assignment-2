@@ -3,6 +3,7 @@ from screens.MenuScreen import MenuScreen
 from screens.LoginScreen import LoginScreen
 from screens.ShowCustomerScreen import ShowCustomerScreen
 from screens.InsertRoomType import InsertRoomType
+from screens.TotalGuest import TotalGuest
 import psycopg.errors as pg_errors
 import psycopg as pg
 import tomli
@@ -32,7 +33,8 @@ class App(tk.Tk):
 
         self.pg_connection: Optional[pg.Connection] = None
         self.sub_screens = [MenuScreen(self), LoginScreen(
-            self), ShowCustomerScreen(self), InsertRoomType(self)]
+            self), ShowCustomerScreen(self), InsertRoomType(self), 
+            TotalGuest(self)]
         for screen in self.sub_screens:
             screen.place(in_=self, x=0, y=0, relwidth=1, relheight=1)
 
@@ -49,6 +51,8 @@ class App(tk.Tk):
                 screen_to_switch_to = self.sub_screens[2]
             case "InsertRoomType":
                 screen_to_switch_to = self.sub_screens[3]
+            case "TotalGuest":
+                screen_to_switch_to = self.sub_screens[4]
             case _:
                 raise ValueError(
                     f"screen must be one of \"MenuScreen\", \"LoginScreen\" or \"ShowCustomerScreen\", recived {screen}")
