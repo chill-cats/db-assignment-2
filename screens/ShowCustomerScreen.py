@@ -15,7 +15,6 @@ class ShowCustomerScreen(tk.Frame):
         self.back_to_menu_button = BackButton(
             self.back_container, command=self.back_to_menu)
 
-        # self.back_to_menu_button.grid(column=0, row=0)
         self.back_to_menu_button.pack(side=tk.LEFT)
 
         self.table = ttk.Treeview(self, columns=(
@@ -32,11 +31,9 @@ class ShowCustomerScreen(tk.Frame):
         self.table.heading(5, text="Username")
         self.table.heading(6, text="Vip Point")
         self.table.heading(7, text="Class")
-        # self.table.grid(column=0, row=1)
         self.table.pack(expand=True, fill="both")
 
     def before_switch_handler(self):
-        print("Something")
         self.show_customer_table()
 
     def back_to_menu(self):
