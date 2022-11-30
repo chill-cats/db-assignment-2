@@ -20,7 +20,12 @@ class ShowCustomerScreen(tk.Frame):
 
         self.table = ttk.Treeview(self, columns=(
             1, 2, 3, 4, 5, 6, 7), show="headings")
-        self.table.heading(1, text="ID")
+        self.table.column(1, anchor=tk.CENTER, width=100, stretch=True)
+        self.table.column(2, anchor=tk.CENTER, width=100, stretch=True)
+        self.table.column(3, anchor=tk.CENTER, width=100, stretch=True)
+        self.table.column(6, anchor=tk.CENTER, width=10, stretch=True)
+        self.table.column(7, anchor=tk.CENTER, width=60, stretch=False)
+        self.table.heading(1, text="ID",)
         self.table.heading(2, text="CCCD")
         self.table.heading(3, text="Phone")
         self.table.heading(4, text="Email")
@@ -28,7 +33,7 @@ class ShowCustomerScreen(tk.Frame):
         self.table.heading(6, text="Vip Point")
         self.table.heading(7, text="Class")
         # self.table.grid(column=0, row=1)
-        self.table.pack(fill="both")
+        self.table.pack(expand=True, fill="both")
 
     def before_switch_handler(self):
         print("Something")
