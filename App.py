@@ -30,7 +30,8 @@ class App(tk.Tk):
         #self.resizable(0, 0)
 
         self.pg_connection: Optional[pg.Connection] = None
-        self.sub_screens = [MenuScreen(self), LoginScreen(self), ShowCustomerScreen(self), InsertRoomType(self)]
+        self.sub_screens = [MenuScreen(self), LoginScreen(
+            self), ShowCustomerScreen(self), InsertRoomType(self)]
         for screen in self.sub_screens:
             screen.place(in_=self, x=0, y=0, relwidth=1, relheight=1)
 

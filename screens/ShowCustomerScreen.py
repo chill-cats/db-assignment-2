@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import sql_command as sql
+from screens.BackButton import BackButton
+
 
 class ShowCustomerScreen(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
@@ -10,12 +12,13 @@ class ShowCustomerScreen(tk.Frame):
         self.show_customer_container = tk.Frame(self)
         self.show_customer_container.place(relx=0.5, rely=0.5, anchor="c")
 
-        self.back_to_menu_button = tk.Button(
-            self.show_customer_container, text="<- Menu", command=self.back_to_menu)
+        self.back_to_menu_button = BackButton(self, command=self.back_to_menu)
 
-        self.back_to_menu_button.grid(column=0, row=0)
+        # self.back_to_menu_button.grid(column=0, row=0)
+        self.back_to_menu_button.place(x=0, y=0)
 
-        self.table = ttk.Treeview(self.show_customer_container, columns=(1, 2, 3, 4, 5, 6, 7), show="headings") 
+        self.table = ttk.Treeview(self.show_customer_container, columns=(
+            1, 2, 3, 4, 5, 6, 7), show="headings")
         self.table.heading(1, text="ID")
         self.table.heading(2, text="CCCD")
         self.table.heading(3, text="Phone")
@@ -23,7 +26,8 @@ class ShowCustomerScreen(tk.Frame):
         self.table.heading(5, text="Username")
         self.table.heading(6, text="Vip Point")
         self.table.heading(7, text="Class")
-        self.table.grid(column=0, row=1)
+        # self.table.grid(column=0, row=1)
+        self.table.pack()
 
     def back_to_menu(self):
         self.parent.switch_to("MenuScreen")
@@ -36,4 +40,6 @@ class ShowCustomerScreen(tk.Frame):
                 cur.execute(sql.show_customer)
                 rows = cur.fetchall()
                 for row in rows:
+                    self.table.insert('', 'end', values=row)
+                    self.table.insert('', 'end', values=row)
                     self.table.insert('', 'end', values=row)
