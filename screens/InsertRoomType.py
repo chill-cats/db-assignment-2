@@ -93,18 +93,26 @@ class InsertRoomType(tk.Frame):
 
     def insert_to_database(self):
         room_type_name = self.room_type_name.get()
-        conn = self.parent.pg_connection.execute(
-            "INSERT INTO \"RoomType\" (room_type_name, max_guest, area, description) VALUES (%s, %s, %s, %s)",
-            (room_type_name, self.max_guest.get(), self.area.get(), self.description.get())
-        )
-        self.parent.pg_connection.execute(
-            "SELECT room_type_id FROM \"RoomType\" WHERE (room_type_name = %s)",
-            (room_type_name)
-        )
-        print(self.parent.pg_connection.fetchone())
-        if conn:
+        with self.parent.pg_connection.cursor() as cur:
+            cur.execute(
+                "INSERT INTO \"RoomType\" (room_type_name, max_guest, area, description) VALUES (%s, %s, %s, %s)",
+                (room_type_name, self.max_guest.get(), self.area.get(), self.description.get())
+            )
+            cur.execute(
+                "SELECT room_type_id FROM \"RoomType\" WHERE (room_type_name = %s)",
+                (room_type_name,)
+            )
+            room_type_id = cur.fetchone()[0]
+            cur.execute(
+                "INSERT INTO \"BedInfo\" (room_type_id, size, count) VALUES (%s, %s, %s)",
+                (room_type_id, self.size.get(), self.count.get())
+            )
+            cur.execute(
+                "INSERT INTO \"RoomTypeWithMaterialType\" (material_type_id, room_type_id, amount) VALUES (%s, %s, %s)",
+                (self.material_type_id.get(), room_type_id, self.material_amount.get())
+            )
             messagebox.showinfo(
-                message=f"Successful insert to the database !")
+                    message=f"Successful insert to the database !")
         self.parent.pg_connection.commit()
 
     def back_to_menu(self):
