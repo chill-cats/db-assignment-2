@@ -15,9 +15,13 @@ class MenuScreen(tk.Frame):
         self.total_guest_button = tk.Button(
             self, text="Total guest", command=self.total_guest_handler)
 
+        self.sign_out_button = tk.Button(
+            self, text="Sign out", command=self.sign_out_handler)
+
         self.show_customer_button.grid(column=0, row=0)
         self.insert_room_type_button.grid(column=1, row=0)
         self.total_guest_button.grid(column=2, row=0)
+        self.sign_out_button.grid(column=3, row=0)
 
     def show_customer_handler(self):
         self.parent.switch_to("ShowCustomerScreen")
@@ -27,6 +31,13 @@ class MenuScreen(tk.Frame):
 
     def total_guest_handler(self):
         self.parent.switch_to("TotalGuest")
+    
+    def sign_out_handler(self):
+        self.parent.switch_to("LoginScreen")
+        self.parent.pg_connection.close()
+        self.parent.pg_connection = None
+        self.parent.sub_screens[1].password.set("")
+        self.parent.sub_screens[1].user_name.set("")
 
     def before_switch_handler(self):
         pass
